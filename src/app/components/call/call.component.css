@@ -1,0 +1,25 @@
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+.example-full-width {
+    width: 100%;
+  }
+.pull-left{
+    float: left !important;
+  }
+.pull-right{
+    float: right !important;
+  }
+.search-div{
+  margin: 0px !important;
+  padding: 0px !important;
+  }
+button{
+    margin: 2px !important;
+  }
+  
+mat-form-field{
+  margin-bottom: 15px !important;
+}

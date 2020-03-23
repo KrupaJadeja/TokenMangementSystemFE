@@ -1,0 +1,32 @@
+<div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h2 class="pull-left">Edit Customer</h2>
+        <form class="example-form" [formGroup]="editCustomerForm" (ngSubmit)="onSubmit()">
+          <mat-form-field class="example-full-width">
+            <mat-label>Customer Number</mat-label>
+            <input matInput placeholder="Customer Number" formControlName="customerNumber">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Name" formControlName="name">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Contact Number</mat-label>
+            <input matInput placeholder="Contact Number" formControlName="contactNumber">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Age</mat-label>
+            <input matInput placeholder="Age" formControlName="age">
+          </mat-form-field>
+          <div class="form-group pull-right">
+              <button [disabled]="loading" class="btn btn-primary">Update</button>
+              <a [routerLink]="['/user/list']" class="btn btn-link">Cancel</a>
+          </div>
+          <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

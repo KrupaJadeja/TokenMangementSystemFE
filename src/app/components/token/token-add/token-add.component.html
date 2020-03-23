@@ -1,0 +1,42 @@
+<div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h2 class="pull-left">Add Token</h2>
+        <form class="example-form" [formGroup]="addTokenForm" (ngSubmit)="onSubmit()">
+          <mat-form-field class="example-full-width">
+            <mat-select placeholder="Slecte Customer" formControlName="customer" name="customer">
+              <mat-option *ngFor="let customer of customers" [value]="customer">
+                {{customer.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-select placeholder="Select department" formControlName="department" name="department">
+              <mat-option *ngFor="let department of departments" [value]="department.name">
+                {{department.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- <mat-form-field class="example-full-width">
+            <mat-select placeholder="Select Counter" formControlName="counter" name="counter">
+              <mat-option *ngFor="let counter of counters" [value]="counter">
+                {{counter.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field> -->
+          <mat-checkbox [ngModel]="priority" (change)="getPriority($event)" [ngModelOptions]="{standalone: true}">
+            Priority
+          </mat-checkbox>
+
+          <div class="form-group pull-right">
+            <button [disabled]="loading" class="btn btn-primary">Save & Print</button>
+            <a [routerLink]="['/user/list']" class="btn btn-link">Cancel</a>
+          </div>
+
+          <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

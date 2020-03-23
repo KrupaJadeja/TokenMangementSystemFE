@@ -1,0 +1,24 @@
+<div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h2 class="pull-left">Edit Counter</h2>
+        <form class="example-form" [formGroup]="editCounter" (ngSubmit)="onSubmit()">
+          <mat-form-field class="example-full-width">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Department name" formControlName="name">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Letter</mat-label>
+            <input matInput placeholder="letter" formControlName="letter">
+          </mat-form-field>
+          <div class="form-group pull-right">
+              <button [disabled]="loading" class="btn btn-primary">Update</button>
+              <a [routerLink]="['/counter/list']" class="btn btn-link">Cancel</a>
+          </div>
+          <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

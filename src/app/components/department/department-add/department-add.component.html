@@ -1,0 +1,32 @@
+<div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h2 class="pull-left">Add Department</h2>
+        <form class="example-form" [formGroup]="addDepartment" (ngSubmit)="onSubmit()">
+          <mat-form-field class="example-full-width">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Department name" formControlName="name">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Letter</mat-label>
+            <input matInput placeholder="letter" formControlName="letter">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Start</mat-label>
+            <input matInput placeholder="Email" formControlName="start">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Color</mat-label>
+            <input matInput placeholder="color" formControlName="color">
+          </mat-form-field>
+          <div class="form-group pull-right">
+              <button [disabled]="loading" class="btn btn-primary">Save</button>
+              <a [routerLink]="['/user/list']" class="btn btn-link">Cancel</a>
+          </div>
+          <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

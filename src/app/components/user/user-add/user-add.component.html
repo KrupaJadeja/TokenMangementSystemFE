@@ -1,0 +1,50 @@
+<div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h2 class="pull-left">Add Users</h2>
+        <form class="example-form" [formGroup]="registerUsers" (ngSubmit)="onSubmit()">
+          <mat-form-field class="example-full-width">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Name" formControlName="name">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="Username" formControlName="userName">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" formControlName="email">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-select placeholder="Roles" formControlName="role" name="role">
+              <mat-option *ngFor="let role of roles" [value]="role">
+                {{role}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Password</mat-label>
+            <input matInput name="password" placeholder="Password" formControlName="password" [type]="hide ? 'password' : 'text'" 
+            [errorStateMatcher]="passwordErrorMatcher">
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+            <mat-error>Password must match </mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Confirm Password</mat-label>
+            <input matInput name="confirm password" placeholder="Confirm Password" formControlName="confirmPwd" type="password"
+            [errorStateMatcher]="confirmErrorMatcher">
+            <mat-error>Password must match </mat-error>
+          </mat-form-field>
+
+          <div class="form-group pull-right">
+              <button [disabled]="loading" class="btn btn-primary">Save</button>
+              <a [routerLink]="['/user/list']" class="btn btn-link">Cancel</a>
+          </div>
+         
+          <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

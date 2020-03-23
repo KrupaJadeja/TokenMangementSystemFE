@@ -1,0 +1,115 @@
+<h3>Call</h3>
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- left column -->
+      <div class="col-md-6">
+        <!-- general form elements -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">New Call</h3>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+          <form class="example-form" [formGroup]="callTokenForm">
+            <div class="card-body">
+              <mat-form-field class="example-full-width">
+                <mat-select placeholder="Slecte User" formControlName="assigned_user" name="assigned_user">
+                  <mat-option *ngFor="let user of users" [value]="user">
+                    {{user.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <mat-select placeholder="Select department" formControlName="department" name="department">
+                  <mat-option *ngFor="let department of departments" [value]="department.name">
+                    {{department.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <mat-select placeholder="Select Counter" formControlName="counter" name="counter">
+                  <mat-option *ngFor="let counter of counters" [value]="counter.name">
+                    {{counter.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="form-group pull-right">
+              <button class="btn btn-danger" (click)="delete()">Stop</button>
+              <button [disabled]="loading" (click)="onSubmit()" class="btn btn-primary">Call Next</button>
+            </div>
+            <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <!-- general form elements disabled -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Todays Queue</h3>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div class="search-div">
+              <mat-form-field class="example-full-width">
+                <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+                <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+            <div class="mat-elevation-z8">
+              <mat-table [dataSource]="listData" matSort>
+                <ng-container matColumnDef="department">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Department</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.department}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="tokenNumber">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Number</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.tokenNumber}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="called">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Called</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.called}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="priority">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Priority</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.priority}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="counter">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Counter</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.counter}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="recall">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>ReCall</mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <button mat-icon-button [disabled]="!element.recall " color="primary" (click)="recall()">
+                      <mat-icon>refresh</mat-icon>
+                    </button>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="loading">
+                  <mat-footer-cell *matFooterCellDef colspan="6">
+                    Loading data...
+                  </mat-footer-cell>
+                </ng-container>
+                <ng-container matColumnDef="noData">
+                  <mat-footer-cell *matFooterCellDef colspan="6">
+                    No data.
+                  </mat-footer-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+                <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+              </mat-table>
+              <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
