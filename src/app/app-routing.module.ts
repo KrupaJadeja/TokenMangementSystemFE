@@ -22,9 +22,13 @@ import { TokenAddComponent } from './components/token/token-add/token-add.compon
 import { PrintLayoutComponent } from './components/token/print-layout/print-layout.component';
 import { TokenComponent } from './components/token/token.component';
 import { CallComponent } from './components/call/call.component';
+import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassword.component';
+import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
 
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
+    { path: 'forgot',component: ForgotpasswordComponent },
+    { path: 'reset', component: RecoverPasswordComponent},
     { path: '', component: LayoutComponent, canActivate: [AuthGuard] ,
         children: [
             { path: 'menu', component: AppMenuComponent, canActivate: [AuthGuard] },
@@ -46,6 +50,7 @@ const appRoutes: Routes = [
             { path: 'token/add', component: TokenAddComponent,canActivate: [AuthGuard]},
             { path: 'token/:id', component: TokenComponent,canActivate: [AuthGuard]},
             { path: 'call', component: CallComponent,canActivate: [AuthGuard]},
+            
             // otherwise redirect to home
             { path: '**', redirectTo: '' }
         ]
