@@ -47,6 +47,11 @@ import { MessagesComponent } from './components/messages/messages.component';
 import { MessagesService } from './_services/message.service';
 import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassword.component';
 import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
+import { UploadProfileImageComponent } from './components/user/upload-profile-image/upload-profile-image.component';
+import { UserProfileService } from './_services/userProfile.service';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { ConfirmService } from './_services/confirm.service';
+import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +84,10 @@ import { RecoverPasswordComponent } from './components/recover-password/recover-
     CallComponent,
     MessagesComponent,
     ForgotpasswordComponent,
-    RecoverPasswordComponent
+    RecoverPasswordComponent,
+    UploadProfileImageComponent,
+    ConfirmDialogComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -102,11 +110,15 @@ import { RecoverPasswordComponent } from './components/recover-password/recover-
     CustomerService,
     TokenService,
     TokenNumberService,
-    MessagesService
+    MessagesService,
+    UserProfileService,
+    ConfirmService
    ],
   bootstrap: [AppComponent],
   entryComponents: [
     MessagesComponent,
+    ConfirmDialogComponent,
+    UploadProfileImageComponent
   ],
 })
 export class AppModule { }

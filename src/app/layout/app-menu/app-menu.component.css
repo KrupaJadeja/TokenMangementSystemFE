@@ -1,0 +1,17 @@
+.sidebar{
+    overflow-y : unset !important;
+}
+.pnx-msg-icon{
+    width: 238px !important;
+    height: 50px !important;
+}
+.mat-cell {
+    color: white;
+}
+.mat-header-cell{
+    color: white;
+}
+.user-panel img {
+    height: 40px !important;
+    width: 2.5rem !important;
+}

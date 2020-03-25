@@ -43,7 +43,7 @@ export class DepartmentAddComponent implements OnInit {
     this.departmentService.addDepartment(this.addDepartment.value)
       .then(
         data => {
-          this.router.navigate(['/customer/list']);
+          this.router.navigate(['/department/list']);
         },
         error => {
           this.loading = false;

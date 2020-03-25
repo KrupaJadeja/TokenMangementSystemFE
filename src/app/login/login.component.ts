@@ -26,34 +26,27 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private userService: UserService,
     private _cookieService: CookieService
-  ) { }
+  ) {if (sessionStorage.getItem('remember') == "true") {
+      this.Formdata.username =  sessionStorage.getItem('username'),
+      this.Formdata.password = sessionStorage.getItem('password');
+      this.Formdata.rememberme = sessionStorage.getItem('remember');
+    }
+  }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       usernameOrEmail: ['', Validators.required],
       password: ['', Validators.required]
     });
-    if (this._cookieService.get('remember')) {
-      this.Formdata.username = this._cookieService.get('username');
-      this.Formdata.password = this._cookieService.get('password');
-      this.Formdata.rememberme = this._cookieService.get('remember');
-    }
-
-    // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   // convenience getter for easy access to form fields
   get f() { return this.loginForm.controls; }
 
   getCookie() {
-    if (this.Formdata.rememberme != false) {
-      this._cookieService.set('username', this.Formdata.username);
-      this._cookieService.set('password', this.Formdata.password);
-      this._cookieService.set('remember', this.Formdata.rememberme);
-    } else {
-      this._cookieService.deleteAll();
-    }
+    sessionStorage.setItem('username', this.Formdata.username);
+    sessionStorage.setItem('password', this.Formdata.password);
+    sessionStorage.setItem('remember', this.Formdata.rememberme);
   }
 
   onSubmit() {

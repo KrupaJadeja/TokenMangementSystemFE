@@ -1,0 +1,10 @@
+<h2>Select Photo</h2>
+<br />
+<div class="form-group">
+  <label for="name">Upload Image</label>
+  <input accept="image/*" type="file" (change)="selectFile($event)" class="form-control" />
+</div>
+<div class="form-group">
+  <button (click)="dialogRef.close()" class="btn btn-primary btn-sm pull-right">Cancle</button>
+  <button [disabled]="loading" (click)="onUpdateImage();" class="btn btn-primary btn-sm pull-right">Submit</button>
+</div>

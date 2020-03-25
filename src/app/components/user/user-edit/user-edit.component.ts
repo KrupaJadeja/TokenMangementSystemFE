@@ -10,7 +10,7 @@ import { UserService } from 'src/app/_services/user.service';
   styleUrls: ['./user-edit.component.css']
 })
 export class UserEditComponent implements OnInit {
-  roles = ['Staff', 'Token', 'Customer'];
+  roles = ['Admin','Staff', 'Token', 'Customer'];
   editUserForm: FormGroup;
   loading = false;
   submitted = false;
@@ -67,8 +67,10 @@ export class UserEditComponent implements OnInit {
           this.selectedRole = this.roles[0];
         }else if(data.role == this.roles[1]){
           this.selectedRole = this.roles[1];
-        }else{
+        }else if(data.role == this.roles[2]){
           this.selectedRole = this.roles[2];
+        }else{
+          this.selectedRole = this.roles[3];
         }
       }
     });

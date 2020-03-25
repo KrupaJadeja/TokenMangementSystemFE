@@ -1,0 +1,23 @@
+<div class="profile-page">
+
+  <div class="user-info">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-xs-12 col-md-10 offset-md-1">
+          <a (click)="editProfile()" class="btn btn-sm btn-outline-secondary action-btn pull-right">
+            <i class="fa fa-edit"></i> Edit Profile Settings
+          </a>
+          <img  class="user-img" />
+          <h4>User     : {{user.userName }}</h4>
+          <p>Name      : {{user.name}}</p>
+          <p>Email     : {{user.email}}</p>
+          <p>Role      : {{user.role}}</p>
+          <a class="far fa-images" (click)="uploadImage()">Update Profile Picture</a>
+    
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

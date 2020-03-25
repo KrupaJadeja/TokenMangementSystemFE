@@ -1,4 +1,7 @@
-.example-form {
+button{
+    margin: 2px !important;
+  }
+  .example-form {
     min-width: 150px;
     max-width: 500px;
     width: 100%;
@@ -14,7 +17,4 @@
   }
 mat-form-field{
   margin-bottom: 15px !important;
-}
-button{
-  margin: 10px !important;
 }

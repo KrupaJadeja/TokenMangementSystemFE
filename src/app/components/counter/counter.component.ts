@@ -3,6 +3,10 @@ import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { Router } from '@angular/router';
 import { CounterService } from 'src/app/_services/counter.service';
 import { Counter } from 'src/app/_models/counter';
+import { MessagesService } from 'src/app/_services/message.service';
+import { ConfirmService } from 'src/app/_services/confirm.service';
+import { switchMap } from 'rxjs/operators';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-counter',
@@ -17,7 +21,9 @@ export class CounterComponent implements OnInit {
   searchKey: string;
 
   constructor(private router: Router,
-    private counterService: CounterService) { }
+    private counterService: CounterService,
+    private messagesService: MessagesService,
+    private confirmService: ConfirmService) { }
 
   ngOnInit() {
     this.counterService.getCounters().then(counter => {
@@ -42,10 +48,16 @@ export class CounterComponent implements OnInit {
   }
 
   deleteCounter(counter: Counter): void {
-    this.counterService.deleteCounter(counter)
-      .then(data => {
-        console.log(data);
-        this.counterService.getCounters().then(counter => {
+    const name = 'Delete ' + counter.name + '?';
+    this.confirmService.confirm(name, 'This action is final. Gone forever!').pipe(
+      switchMap(res => {if (res === true) {
+        return this.counterService.deleteCounter(counter);
+		}}))
+      .subscribe(
+        result => {
+          this.success();
+          // Refresh DataTable to remove row.
+          this.counterService.getCounters().then(counter => {
           this.listData = new MatTableDataSource(counter);
           this.listData.sort = this.sort;
           this.listData.paginator = this.paginator;
@@ -55,11 +67,20 @@ export class CounterComponent implements OnInit {
             });
           };
         });
-      });
+		 
+        },
+        (err: HttpErrorResponse) => {
+          this.messagesService.openDialog('Error', 'Delete did not happen.');
+        }
+      );
   };
 
   edit(counter: Counter) {
     this.router.navigate(['/counter/edit',counter.id]);
+  }
+
+  private success() {
+    this.messagesService.openDialog('Success', 'Database updated as you wished!');
   }
 
 }

@@ -24,6 +24,8 @@ import { TokenComponent } from './components/token/token.component';
 import { CallComponent } from './components/call/call.component';
 import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassword.component';
 import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
+import { UploadProfileImageComponent } from './components/user/upload-profile-image/upload-profile-image.component';
+import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -50,7 +52,8 @@ const appRoutes: Routes = [
             { path: 'token/add', component: TokenAddComponent,canActivate: [AuthGuard]},
             { path: 'token/:id', component: TokenComponent,canActivate: [AuthGuard]},
             { path: 'call', component: CallComponent,canActivate: [AuthGuard]},
-            
+            { path: 'upload/image', component: UploadProfileImageComponent,canActivate: [AuthGuard]},
+            { path: 'profile', component: UserProfileComponent,canActivate: [AuthGuard]},
             // otherwise redirect to home
             { path: '**', redirectTo: '' }
         ]
